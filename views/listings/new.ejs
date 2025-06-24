@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Create a New Blog Post</h3>
+          </div>
+          <div class="card-body">
+            <form method="POST" novalidate class="needs-validation" action="/listings" enctype="multipart/form-data">
+
+              <div class="mb-3">
+                <label for="title" class="form-label">Post Title</label>
+                <input name="listings[title]" type="text" class="form-control" id="title" placeholder="Enter post title"
+                  required>
+                <div class="valid-feedback"> Title Looks good!</div>
+                <div class="invalid-feedback">Please provide a valid title.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="image" class="form-label"> Upload Cover Image</label>
+                <input name="image" type="file" class="form-control" id="image" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please provide a valid image URL.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <input name="listings[category]" type="text" class="form-control" id="category"
+                  placeholder="Enter post category" required>
+                <div class="valid-feedback"> Category Looks good!</div>
+                <div class="invalid-feedback">Please provide a valid category.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listings[description]" class="form-control" id="description" rows="15"
+                  placeholder="Enter post description" required></textarea>
+                <div class="valid-feedback"> Description Looks good!</div>
+                <div class="invalid-feedback">Please enter a description.</div>
+              </div>
+
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg">Post Blog</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="container mt-5 col-md-6 offset-md-3">
+    <div class="card shadow-lg rounded-4">
+      <div class="card-header bg-primary text-white rounded-top-4 text-center">
+        <h3>Create an Account</h3>
+      </div>
+
+      <form action="/signup" method="POST" novalidate class="needs-validation">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control rounded-3" id="username" name="username" required minlength="3"
+              maxlength="20">
+            <div class="valid-feedback">Valid Username!</div>
+            <div class="invalid-feedback">Please enter a valid email Username.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control rounded-3" id="email" name="email" required>
+            <div class="valid-feedback">Valid email!</div>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control rounded-3" id="password" name="password" required minlength="6">
+            <div class="valid-feedback">Valid Password!</div>
+            <div class="invalid-feedback">Please enter a valid email Password.</div>
+          </div>
+
+          <div class="card-footer text-center rounded-bottom-4 p-3">
+            <button type="submit" class="btn btn-success w-100">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

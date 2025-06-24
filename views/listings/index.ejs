@@ -1,0 +1,110 @@
+<% layout('layouts/boilerplate') %>
+
+  <div id="postContent" class="mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <% if (currentuser) { %>
+        <a href="/listings/new" class="btn btn-danger">Post New Blog</a>
+        <% } %>
+    </div>
+
+    <!--(Top 3) -->
+    <div class="col-12">
+      <% if (currentPage===1) { %>
+        <div class="row mb-5 gx-4 gy-4">
+          <div class="col-12 col-md-8">
+            <% if (featuredListings[0]) { %>
+              <a href="/listings/<%= featuredListings[0]._id %>" class="text-decoration-none">
+                <div class="card bg-dark text-white border-0 h-80">
+                  <img src="<%= featuredListings[0].image.url %>" class="card-img img-fluid rounded" alt="Main Feature"
+                    style="height: 100%; width: 100%;" />
+                  <div class="card-img-overlay d-flex flex-column justify-content-end p-3"
+                    style="background: rgba(0,0,0,0.4); border-radius: 0.5rem;">
+                    <span class="badge bg-danger mb-2" style="width: 170px;">
+                      <%= featuredListings[0].category.toUpperCase() %>
+                    </span>
+                    <h3 class="m-0 text-white">
+                      <%= featuredListings[0].title %>
+                    </h3>
+                    <p class="text-light mb-0">
+                      <%= featuredListings[0].date.toDateString() %>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <% } %>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="d-flex flex-column justify-content-between gap-4 h-80">
+              <% for (let i=1; i <=2; i++) { const post=featuredListings[i]; if (post) { %>
+                <div>
+                  <a href="/listings/<%= post._id %>">
+                    <img src="<%= post.image.url %>" class="img-fluid rounded" alt="Side Post"
+                      style="height: 180px; object-fit: cover; width: 100%;" />
+                  </a>
+                  <div class="mt-2">
+                    <span class="badge bg-danger mb-1">
+                      <%= post.category.toUpperCase() %>
+                    </span>
+                    <h5 class="fw-bold mb-1">
+                      <a href="/listings/<%= post._id %>" class="text-dark text-decoration-none">
+                        <%= post.title %>
+                      </a>
+                    </h5>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">
+                      <%= post.date.toDateString() %>
+                    </p>
+                  </div>
+                </div>
+                <% }} %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+
+    <!-- Other Posts -->
+    <div class="row">
+      <% otherListings.slice(0, 9).forEach(listing=> { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0">
+            <a href="/listings/<%= listing.id %>">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="Blog Image"
+                style="height: 200px; object-fit: cover;" />
+            </a>
+            <div class="card-body">
+              <small class="text-danger text-uppercase fw-semibold">
+                <%= listing.category %>
+              </small>
+              <h5 class="card-title mt-2">
+                <a href="/listings/<%= listing.id %>" class="text-dark text-decoration-none">
+                  <%= listing.title %>
+                </a>
+              </h5>
+              <p class="text-muted mb-1">By <%= listing.author.username %>
+              </p>
+              <p class="text-muted" style="font-size: 0.9rem;">
+                <%= listing.date.toDateString() %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+    </div>
+
+
+    <div class="d-flex justify-content-center gap-4 mt-3 mb-4">
+      <% if (currentPage> 1) { %>
+        <a href="/listings?<%= category ? 'category=' + category + '&' : '' %>page=<%= currentPage - 1 %>"
+          class="text-decoration-none fw-semibold text-primary pb-1" style="font-size: 0.9rem;">
+          <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+        <% } %>
+          <% if (hasNextPage) { %>
+            <a href="/listings?<%= category ? 'category=' + category + '&' : '' %>page=<%= currentPage + 1 %>"
+              class="text-decoration-none fw-semibold text-primary pb-1" style="font-size: 0.9rem;">
+              See All Posts<i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+            <% } %>
+    </div>
+  </div>

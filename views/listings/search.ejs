@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate') %>
+
+    <h2>Results for "<%= query %>"</h2>
+
+    <div class="row">
+        <% if (listings.length> 0) { %>
+            <% listings.forEach(listing=> { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0">
+                        <a href="/listings/<%= listing.id %>">
+                            <img src="<%= listing.image.url %>" class="card-img-top" alt="Blog Image"
+                                style="height: 200px; object-fit: cover;" />
+                        </a>
+                        <div class="card-body">
+                            <small class="text-danger text-uppercase fw-semibold">
+                                <%= listing.category %>
+                            </small>
+                            <h5 class="card-title mt-2">
+                                <a href="/listings/<%= listing.id %>" class="text-dark text-decoration-none">
+                                    <%= listing.title %>
+                                </a>
+                            </h5>
+                            <p class="text-muted mb-1">By <%= listing.author.username %>
+                            </p>
+                            <p class="text-muted" style="font-size: 0.9rem;">
+                                <%= listing.date.toDateString() %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <p>No matching posts found.</p>
+                        <% } %>
+
+    </div>
